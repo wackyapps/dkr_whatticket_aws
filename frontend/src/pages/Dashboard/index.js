@@ -308,6 +308,9 @@ const Dashboard = () => {
           setSupportPix(true);
           setSupportIsBr(true);
         }
+      })
+      .catch(() => {
+        console.warn("Could not reach ipapi.co for country detection. Defaulting to non-BR settings.");
       });
   }, []);
   
@@ -562,7 +565,7 @@ const Dashboard = () => {
                       <Typography className={classes.ticketzProTitle} component="h3" variant="h5" gutterBottom>
                         Ticketz PRO
                       </Typography>
-                      <Typography component="h4" variant="h7" gutterBottom>
+                      <Typography component="h4" variant="h6" gutterBottom>
                       <ul className={classes.ticketzProFeatures}>
                         <li>Whatsapp Oficial - Instagram - Messenger e outros</li>
                         <li>Features exclusivas</li>
@@ -573,8 +576,8 @@ const Dashboard = () => {
                       <Typography component="h3" variant="h5">
                         Assine por R$ 199/mês
                       </Typography>
-                      <Typography component="h3" variant="h7" gutterBottom>
-                        direto dentro do sistema
+                      <Typography component="h3" variant="h6" gutterBottom>
+                        direto dalam sistem
                       </Typography>
                       { gitinfo.commitHash && 
                       <Typography component="h4" variant="h6">
@@ -647,8 +650,8 @@ const Dashboard = () => {
                           <div>
                             <img className={classes.paymentpix} src="/ticketzpix.png" />
                           </div>
-                          <Typography className={classes.pixkey} component="body2" paragraph>
-                            Clique para copiar a chave PIX
+                          <Typography className={classes.pixkey} variant="body2" component="p">
+                            Klik untuk menyalin kunci PIX
                           </Typography>
                         </div>
                       </Grid>
@@ -661,7 +664,7 @@ const Dashboard = () => {
                         </Typography>
                         { supportPix || <> 
                         {supportIsBr && <>
-                          <Typography component="body2" paragraph>
+                          <Typography variant="body2" component="p">
                             {i18n.t("ticketz.support.recurringbrl")}
                           </Typography>
                           <div><a href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c9380848f1b8ed1018f2b011f90061f" target="_blank">
@@ -669,7 +672,7 @@ const Dashboard = () => {
                           </a></div>
                         </>}
                         {!supportIsBr && <>
-                          <Typography component="body2" paragraph>
+                          <Typography variant="body2" component="p">
                             {i18n.t("ticketz.support.international")}
                           </Typography>
                           <div><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X6XHVCPMRQEL4" target="_blank">

@@ -475,17 +475,15 @@ const messages = {
         },
       },
       queues: {
-        title: "Antrian",
+        title: "Antrian & Chatbot",
         table: {
           name: "Nama",
           color: "Warna",
+          greeting: "Pesan Sambutan",
           actions: "Aksi",
         },
-        toasts: {
-          deleted: "Antrian berhasil dihapus",
-        },
         buttons: {
-          add: "Daftar Baru",
+          add: "Tambah Antrian",
         },
         dialog: {
           name: "Nama",
@@ -498,10 +496,10 @@ const messages = {
         },
         confirmationModal: {
           deleteTitle: "Hapus",
-          deleteMessage: "Tindakan ini tidak dapat dibatalkan.",
+          deleteMessage: "Apakah Anda yakin? Tindakan ini tidak dapat dibatalkan! Tiket dari antrian ini akan tetap ada tetapi tidak akan lagi ditugaskan ke antrian mana pun.",
         },
         toasts: {
-          deleted: "Data berhasil dihapus",
+          deleted: "Antrian berhasil dihapus",
         },
       },
       contactLists: {
@@ -676,22 +674,6 @@ const messages = {
       },
       campaignsConfig: {
         title: "Konfigurasi Kampanye",
-      },
-      queues: {
-        title: "Antrian & Chatbot",
-        table: {
-          name: "Nama",
-          color: "Warna",
-          greeting: "Pesan Sambutan",
-          actions: "Aksi",
-        },
-        buttons: {
-          add: "Tambah Antrian",
-        },
-        confirmationModal: {
-          deleteTitle: "Hapus",
-          deleteMessage: "Apakah Anda yakin? Tindakan ini tidak dapat dibatalkan! Tiket dari antrian ini akan tetap ada tetapi tidak akan lagi ditugaskan ke antrian mana pun.",
-        },
       },
       queueSelect: {
         inputLabel: "Antrian",
