@@ -574,7 +574,7 @@ export default function Options(props) {
           <FormControl className={classes.selectContainer}>
             <TextField
               id="ratings-timeout-field"
-              label="Timeout para avaliação (minutos)"
+              label={i18n.t("settings.ratingsTimeout")}
               variant="standard"
               name="ratingsTimeout"
               type="number"
@@ -593,7 +593,7 @@ export default function Options(props) {
           <FormControl className={classes.selectContainer}>
             <TextField
               id="autoreopen-timeout-field"
-              label="Timeout para reabertura automática (minutos)"
+              label={i18n.t("settings.autoReopenTimeout")}
               variant="standard"
               name="autoReopenTimeout"
               type="number"
@@ -612,7 +612,7 @@ export default function Options(props) {
           <FormControl className={classes.selectContainer}>
             <TextField
               id="noqueue-timeout-field"
-              label="Timeout para ticket sem fila (minutos)"
+              label={i18n.t("settings.noQueueTimeout")}
               variant="standard"
               name="noQueueTimeout"
               type="number"
@@ -630,7 +630,7 @@ export default function Options(props) {
         <Grid xs={12} sm={6} md={4} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id="noqueue-timeout-action-label">
-              Ação para timeout de ticket sem fila
+              {i18n.t("settings.noQueueTimeoutAction")}
             </InputLabel>
             <Select
               labelId="open-timeout-action-label"
@@ -639,10 +639,10 @@ export default function Options(props) {
                 handleSetting("noQueueTimeoutAction", e.target.value, setNoQueueTimeoutAction);
               }}
             >
-              <MenuItem value={"0"}>Fechar</MenuItem>
+              <MenuItem value={"0"}>{i18n.t("common.close")}</MenuItem>
               {queues.map((queue) => (
                 <MenuItem key={queue.id} value={queue.id}>
-                  Transferir para {queue.name}
+                  {i18n.t("common.transferTo")} {queue.name}
                 </MenuItem>
               ))}
             </Select>
@@ -654,7 +654,7 @@ export default function Options(props) {
           <FormControl className={classes.selectContainer}>
             <TextField
               id="openticket-timeout-field"
-              label="Timeout para ticket em atendimento (minutos)"
+              label={i18n.t("settings.openTicketTimeout")}
               variant="standard"
               name="openTicketTimeout"
               type="number"
@@ -672,7 +672,7 @@ export default function Options(props) {
         <Grid xs={12} sm={6} md={4} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id="opentimeout-action-label">
-              Ação para timeout de ticket aberto
+              {i18n.t("settings.openTicketTimeoutAction")}
             </InputLabel>
             <Select
               labelId="open-timeout-action-label"
@@ -681,8 +681,8 @@ export default function Options(props) {
                 handleSetting("openTicketTimeoutAction", e.target.value, setOpenTicketTimeoutAction);
               }}
             >
-              <MenuItem value={"pending"}>Retornar para a fila</MenuItem>
-              <MenuItem value={"closed"}>Fechar atendimento</MenuItem>
+              <MenuItem value={"pending"}>{i18n.t("settings.returnToQueue")}</MenuItem>
+              <MenuItem value={"closed"}>{i18n.t("settings.closeService")}</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -874,7 +874,7 @@ export default function Options(props) {
           <FormControl className={classes.selectContainer}>
             <TextField
               id="primary-color-light-field"
-              label="API Token"
+              label={i18n.t("common.apiToken") || "API Token"}
               variant="standard"
               value={apiToken}
               InputProps={{
@@ -950,7 +950,7 @@ export default function Options(props) {
           <FormControl className={classes.selectContainer}>
             <TextField
               id="openai-key-field"
-              label="AI Key"
+              label={i18n.t("common.aiKey") || "AI Key"}
               variant="standard"
               value={openAiKey}
               onChange={(e) => {

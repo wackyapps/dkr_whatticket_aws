@@ -74,7 +74,7 @@ function AnnouncementDialog({ announcement, open, handleClose }) {
       </DialogContent>
       <DialogActions>
         <Button onClick={() => handleClose()} color="primary" autoFocus>
-          Fechar
+          {i18n.t("common.close")}
         </Button>
       </DialogActions>
     </Dialog>

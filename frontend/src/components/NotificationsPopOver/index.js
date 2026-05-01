@@ -276,7 +276,7 @@ const NotificationsPopOver = (props) => {
         onClick={handleClick}
         
         ref={anchorEl}
-        aria-label="Mostrar Notificações"
+        aria-label={i18n.t("notifications.showNotifications")}
         variant="contained"
 
       >

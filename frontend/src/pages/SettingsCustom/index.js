@@ -151,7 +151,7 @@ const SettingsCustom = () => {
     try {
       setSchedules(data);
       await updateSchedules({ id: company.id, schedules: data });
-      toast.success("Horários atualizados com sucesso.");
+      toast.success(i18n.t("common.toasts.success"));
     } catch (e) {
       toast.error(e);
     }
@@ -177,14 +177,14 @@ const SettingsCustom = () => {
           onChange={handleTabChange}
           className={classes.tab}
         >
-          <Tab label={i18n.t("settings.Options.title")} value={"options"} />
+          <Tab label={i18n.t("settings.options.title")} value={"options"} />
           {schedulesEnabled && <Tab label={i18n.t("settings.schedules.title")} value={"schedules"} />}
-          {isSuper() ? <Tab label={i18n.t("settings.Companies.title")} value={"companies"} /> : null}
-          {isSuper() ? <Tab label={i18n.t("settings.Plans.title")} value={"plans"} /> : null}
-          {isSuper() ? <Tab label={i18n.t("settings.Help.title")} value={"helps"} /> : null}
-          {isSuper() ? <Tab label={i18n.t("settings.Whitelabel.title")} value={"whitelabel"} /> : null}
-          {isSuper() ? <Tab label={i18n.t("settings.PaymentGateways.title")} value={"paymentGateway"} /> : null}
-          {isSuper() ? <Tab label={i18n.t("settings.i18nSettings.title")} value={"i18n"} /> : null}
+          {isSuper() ? <Tab label={i18n.t("settings.companies.title")} value={"companies"} /> : null}
+          {isSuper() ? <Tab label={i18n.t("settings.plans.title")} value={"plans"} /> : null}
+          {isSuper() ? <Tab label={i18n.t("settings.helps.title")} value={"helps"} /> : null}
+          {isSuper() ? <Tab label={i18n.t("settings.whitelabel.title")} value={"whitelabel"} /> : null}
+          {isSuper() ? <Tab label={i18n.t("settings.paymentGateway.title")} value={"paymentGateway"} /> : null}
+          {isSuper() ? <Tab label={i18n.t("settings.i18n.title")} value={"i18n"} /> : null}
         </Tabs>
         <Paper className={classes.paper} elevation={0}>
           <TabPanel

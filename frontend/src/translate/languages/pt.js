@@ -48,6 +48,10 @@ const messages = {
         transferTo: "Transferir para",
         key: "Chave",
         value: "Valor",
+        title: "Título",
+        description: "Descrição",
+        apiToken: "Token da API",
+        aiKey: "Chave da IA",
         validations: {
           required: "Este campo é obrigatório",
           short: "Valor muito curto",
@@ -56,6 +60,24 @@ const messages = {
           invalidEmail: "Email inválido",
           invalidPhone: "Número de telefone inválido",
         },
+        toasts: {
+          success: "Operação realizada com sucesso!",
+          error: "Não foi possível realizar a operação.",
+          accessDenied: "Acesso não permitido.",
+        },
+        buttons: {
+          clear: "Limpar",
+          impersonate: "Acessar como",
+          user: "Usuário",
+        },
+        recurrence: {
+          monthly: "Mensal",
+          bimonthly: "Bimestral",
+          quarterly: "Trimestral",
+          semiannual: "Semestral",
+          annual: "Anual",
+        },
+        status: "Status",
       },
       signup: {
         title: "Cadastre-se",
@@ -93,6 +115,19 @@ const messages = {
           submit: "Cadastrar",
           success: "Empresa criada com sucesso!",
         },
+        recurrence: {
+          monthly: "Mensal",
+          bimonthly: "Bimestral",
+          quarterly: "Trimestral",
+          semiannual: "Semestral",
+          annual: "Anual",
+        },
+        dueDate: "Vencimento",
+        plan: "Plano",
+        campaigns: "Campanhas",
+        created: "Criada Em",
+        impersonate: "Acessar como",
+        impersonateConfirm: "Deseja acessar o sistema como esta empresa?",
       },
       auth: {
         toasts: {
@@ -271,6 +306,7 @@ const messages = {
         },
         toasts: {
           saved: "Fila salva com sucesso",
+          clickSave: "Clique em salvar para registar as alterações",
         },
         buttons: {
           okAdd: "Adicionar",
@@ -291,7 +327,20 @@ const messages = {
           friday: "Sexta-feira",
           saturday: "Sábado",
           sunday: "Domingo",
-        }
+        },
+        tabs: {
+          data: "Dados da Fila",
+          hours: "Horários de Atendimento",
+        },
+        add: "Adicionar",
+        options: "Opções",
+        optionTitle: "Título da opção",
+        titleNotDefined: "Título não definido",
+        typeOptionText: "Digite o texto da opção",
+        exitChatbot: "Sair do chatbot",
+        forwardToQueue: "Encaminhar para Fila",
+        selectQueue: "Selecionar fila",
+        none: "Nenhum",
       },
       userModal: {
         title: {
@@ -489,6 +538,7 @@ const messages = {
       },
       notifications: {
         noTickets: "Nenhuma notificação.",
+        showNotifications: "Mostrar Notificações",
       },
       quickMessages: {
         title: "Respostas Rápidas",
@@ -751,6 +801,14 @@ const messages = {
       },
       helps: {
         title: "Central de Ajuda",
+        videoCode: "Código do Vídeo",
+        toasts: {
+          loadError: "Não foi possível carregar a lista de registros",
+        },
+        confirmationModal: {
+          deleteTitle: "Exclusão de Registro",
+          deleteMessage: "Deseja realmente excluir esse registro?",
+        },
       },
       about: {
         aboutthe: "Sobre o",
@@ -832,6 +890,7 @@ const messages = {
           serveradmin: "Administração do servidor",
         },
         success: "Configurações salvas com sucesso.",
+        saving: "Salvando...",
         copiedToClipboard: "Copiado para a área de transferência",
         title: "Configurações",
         chatbotTicketTimeout: "Timeout do chatbot (minutos)",
@@ -962,17 +1021,17 @@ const messages = {
           welcome: "Seja bem-vindo a",
           expirationTime: "Ativo até",
         },
-        Options: {
+        options: {
           title: "Opções",
         },
-        Companies: {
+        companies: {
           title: "Empresas",
         },
         schedules: {
           title: "Horários",
           updateToNewFormat: "Atualizar para novo formato",
         },
-        Plans: {
+        plans: {
           title: "Planos",
           public: "Público",
           usersLimit: "Limite de usuários",
@@ -980,16 +1039,16 @@ const messages = {
           queuesLimit: "Limite de filas",
           currencyCode: "Código da Moeda (ISO 4217)",
         },
-        Help: {
+        help: {
           title: "Ajuda",
         },
-        Whitelabel: {
+        whitelabel: {
           title: "Whitelabel",
         },
-        PaymentGateways: {
-          title: "Payment gateways",
+        paymentGateway: {
+          title: "Gateways de pagamento",
         },
-        i18nSettings: {
+        i18n: {
           title: "Traduções",
         },
         AIProvider: {
@@ -1006,6 +1065,14 @@ const messages = {
             both: "Ticket e Contacto"
           },
         },
+        ratingsTimeout: "Timeout para avaliação (minutos)",
+        autoReopenTimeout: "Timeout para reabertura automática (minutos)",
+        noQueueTimeout: "Timeout para ticket sem fila (minutos)",
+        noQueueTimeoutAction: "Ação para timeout de ticket sem fila",
+        openTicketTimeout: "Timeout para ticket em atendimento (minutos)",
+        openTicketTimeoutAction: "Ação para timeout de ticket aberto",
+        returnToQueue: "Retornar para a fila",
+        closeService: "Fechar atendimento",
       },
       messagesList: {
         header: {
@@ -1121,6 +1188,13 @@ const messages = {
         phoneNumber: "Telefone",
         localNumber: "Telefone",
       },
+      subscription: {
+        title: "Assinatura",
+        trialPeriod: "Período de teste",
+        trialEndsIn: "Seu período de teste termina em {{days}} dias!",
+        billingEmail: "Email de cobrança",
+        subscribeNow: "Assine Agora!",
+      },
       frontendErrors: {
         ERR_CONFIG_ERROR: "Erro de configuração. Por favor, contate o suporte.",
         ERR_CLOCK_OUT_OF_SYNC: "Relógio fora de sincronia. Por favor, verifique as configurações de data e hora do seu dispositivo.",
@@ -1228,6 +1302,20 @@ const messages = {
           fri: "Sexta",
           sat: "Sábado",
           sun: "Domingo",
+        },
+      },
+      chat: {
+        modal: {
+          title: "Conversa",
+          fillTitle: "Por favor, preencha o título da conversa.",
+          selectUser: "Por favor, selecione pelo menos um usuário.",
+        },
+        buttons: {
+          new: "Nova",
+        },
+        tabs: {
+          chats: "Chats",
+          messages: "Mensagens",
         },
       },
       ticketz: {

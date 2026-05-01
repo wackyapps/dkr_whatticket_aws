@@ -192,7 +192,7 @@ const QueueModal = ({ open, onClose, queueId }) => {
   };
 
   const handleSaveSchedules = async (values) => {
-    toast.success("Clique em salvar para registar as alterações");
+    toast.success(i18n.t("queueModal.toasts.clickSave"));
     setSchedules(values);
     setTab(0);
   };
@@ -233,8 +233,8 @@ const QueueModal = ({ open, onClose, queueId }) => {
           onChange={(_, v) => setTab(v)}
           aria-label="disabled tabs example"
         >
-          <Tab label="Dados da Fila" />
-          {schedulesEnabled && <Tab label="Horários de Atendimento" />}
+          <Tab label={i18n.t("queueModal.tabs.data")} />
+          {schedulesEnabled && <Tab label={i18n.t("queueModal.tabs.hours")} />}
         </Tabs>
         {tab === 0 && (
           <Paper>
@@ -449,7 +449,7 @@ const QueueModal = ({ open, onClose, queueId }) => {
                     loading={false}
                     onSubmit={handleSaveSchedules}
                     initialValues={schedules}
-                    labelSaveButton="Adicionar"
+                    labelSaveButton={i18n.t("queueModal.add")}
                   />
                 </>
             )}

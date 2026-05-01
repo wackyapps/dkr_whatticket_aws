@@ -48,6 +48,10 @@ const messages = {
         transferTo: "Transfer to",
         key: "Key",
         value: "Value",
+        title: "Title",
+        description: "Description",
+        apiToken: "API Token",
+        aiKey: "AI Key",
         validations: {
           required: "This field is required",
           short: "Value too short",
@@ -56,6 +60,25 @@ const messages = {
           invalidEmail: "Invalid email",
           invalidPhone: "Invalid phone number",
         },
+        toasts: {
+          success: "Operation performed successfully!",
+          error: "It was not possible to perform the operation.",
+          accessDenied: "Access denied.",
+        },
+        buttons: {
+          clear: "Clear",
+          impersonate: "Access as",
+          user: "User",
+        },
+        recurrence: {
+          monthly: "Monthly",
+          bimonthly: "Bimonthly",
+          quarterly: "Quarterly",
+          semiannual: "Semiannual",
+          annual: "Annual",
+        },
+        status: "Status",
+        paymentGateways: "Payment Gateways",
       },
       signup: {
         title: "Sign Up",
@@ -93,6 +116,19 @@ const messages = {
           submit: "Register",
           success: "Company created successfully!",
         },
+        recurrence: {
+          monthly: "Monthly",
+          bimonthly: "Bimonthly",
+          quarterly: "Quarterly",
+          semiannual: "Semiannual",
+          annual: "Annual",
+        },
+        dueDate: "Due Date",
+        plan: "Plan",
+        campaigns: "Campaigns",
+        created: "Created At",
+        impersonate: "Access as",
+        impersonateConfirm: "Do you want to access the system as this company?",
       },
       auth: {
         toasts: {
@@ -265,6 +301,7 @@ const messages = {
         },
         toasts: {
           saved: "Queue saved successfully",
+          clickSave: "Click save to register the changes",
         },
         buttons: {
           okAdd: "Add",
@@ -286,6 +323,19 @@ const messages = {
           saturday: "Saturday",
           sunday: "Sunday",
         },
+        tabs: {
+          data: "Queue Data",
+          hours: "Service Hours",
+        },
+        add: "Add",
+        options: "Options",
+        optionTitle: "Option title",
+        titleNotDefined: "Title not defined",
+        typeOptionText: "Type the option text",
+        exitChatbot: "Exit chatbot",
+        forwardToQueue: "Forward to Queue",
+        selectQueue: "Select queue",
+        none: "None",
       },
       userModal: {
         title: {
@@ -482,6 +532,7 @@ const messages = {
       },
       notifications: {
         noTickets: "No notifications.",
+        showNotifications: "Show Notifications",
       },
       quickMessages: {
         title: "Quick Responses",
@@ -744,6 +795,14 @@ const messages = {
       },
       helps: {
         title: "Help Center",
+        videoCode: "Video Code",
+        toasts: {
+          loadError: "Could not load the list of records",
+        },
+        confirmationModal: {
+          deleteTitle: "Delete Record",
+          deleteMessage: "Do you really want to delete this record?",
+        },
       },
       about: {
         aboutthe: "About the",
@@ -825,6 +884,7 @@ const messages = {
           serveradmin: "Server Administration",
         },
         success: "Setting saved successfully.",
+        saving: "Saving...",
         copiedToClipboard: "Copied to clipboard",
         title: "Settings",
         chatbotTicketTimeout: "Chatbot ticket timeout (minutes)",
@@ -955,17 +1015,17 @@ const messages = {
           welcome: "Welcome to",
           expirationTime: "Active until",
         },
-        Options: {
+        options: {
           title: "Options",
         },
-        Companies: {
+        companies: {
           title: "Companies",
         },
         schedules: {
           title: "schedules",
           updateToNewFormat: "Update to new format",
         },
-        Plans: {
+        plans: {
           title: "Plans",
           public: "Public",
           usersLimit: "Users limit",
@@ -973,16 +1033,16 @@ const messages = {
           queuesLimit: "Queues limit",
           currencyCode: "Currency code (ISO 4217)",
         },
-        Help: {
+        help: {
           title: "Help",
         },
-        Whitelabel: {
+        whitelabel: {
           title: "Whitelabel",
         },
-        PaymentGateways: {
-          title: "Pasarelas de pago",
+        paymentGateway: {
+          title: "Payment Gateways",
         },
-        i18nSettings: {
+        i18n: {
           title: "Translations",
         },
         AIProvider: {
@@ -999,6 +1059,14 @@ const messages = {
             both: "Ticket and Contact"
           },
         },
+        ratingsTimeout: "Rating timeout (minutes)",
+        autoReopenTimeout: "Auto-reopen timeout (minutes)",
+        noQueueTimeout: "No queue timeout (minutes)",
+        noQueueTimeoutAction: "Action for no queue timeout",
+        openTicketTimeout: "Open ticket timeout (minutes)",
+        openTicketTimeoutAction: "Action for open ticket timeout",
+        returnToQueue: "Return to queue",
+        closeService: "Close service",
       },
       messagesList: {
         header: {
@@ -1114,6 +1182,13 @@ const messages = {
         phoneNumber: "Phone Number",
         localNumber: "Local Number",
       },
+      subscription: {
+        title: "Subscription",
+        trialPeriod: "Trial Period",
+        trialEndsIn: "Your trial period ends in {{days}} days!",
+        billingEmail: "Billing Email",
+        subscribeNow: "Subscribe Now!",
+      },
       frontendErrors: {
         ERR_CONFIG_ERROR: "Configuration error. Please contact support.",
         ERR_CLOCK_OUT_OF_SYNC: "Clock out of sync. Please check the date and time settings of your device.",
@@ -1211,6 +1286,20 @@ const messages = {
           fri: "Friday",
           sat: "Saturday",
           sun: "Sunday",
+        },
+      },
+      chat: {
+        modal: {
+          title: "Chat",
+          fillTitle: "Please fill in the chat title.",
+          selectUser: "Please select at least one user.",
+        },
+        buttons: {
+          new: "New",
+        },
+        tabs: {
+          chats: "Chats",
+          messages: "Messages",
         },
       },
       ticketz: {

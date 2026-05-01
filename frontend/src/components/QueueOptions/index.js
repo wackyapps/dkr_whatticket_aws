@@ -238,7 +238,7 @@ export function QueueOptionStepper({ queueId, options, updateOptions }) {
             onChange={(event) => handleOptionChangeTitle(event, index)}
             size="small"
             className={classes.input}
-            placeholder="Título da opção"
+            placeholder={i18n.t("queueModal.optionTitle")}
           />
           <div style={{ display: "none" }}>
             <input
@@ -302,7 +302,7 @@ export function QueueOptionStepper({ queueId, options, updateOptions }) {
     return (
       <>
         <Typography>
-          {option.title !== "" ? option.title : "Título não definido"}
+          {option.title !== "" ? option.title : i18n.t("queueModal.titleNotDefined")}
           <IconButton
             variant="outlined"
             size="small"
@@ -329,7 +329,7 @@ export function QueueOptionStepper({ queueId, options, updateOptions }) {
             onChange={(event) => handleOptionChangeMessage(event, index)}
             size="small"
             className={classes.input}
-            placeholder="Digite o texto da opção"
+            placeholder={i18n.t("queueModal.typeOptionText")}
           />
 
           <Grid spacing={3} container>
@@ -345,24 +345,24 @@ export function QueueOptionStepper({ queueId, options, updateOptions }) {
                   size="small"
                 />
               }
-              label="Exit chatbot"
+              label={i18n.t("queueModal.exitChatbot")}
             />
           </Grid>
 
           <Grid xs={12} sm={12} md={3} item>
             <FormControl className={classes.maxWidth}>
               <InputLabel>
-                Forward to Queue
+                {i18n.t("queueModal.forwardToQueue")}
               </InputLabel>
               <Select
                 value={option.forwardQueueId}
                 onChange={(event) => handleChangeForwardQueue(event.target.value, index)}
-                label="Select queue"
+                label={i18n.t("queueModal.selectQueue")}
                 size="small"
                 disabled={option.exitChatbot && !option.forwardQueueId}
               >
                 <MenuItem key="noqueue" value="">
-                  None
+                  {i18n.t("queueModal.none")}
                 </MenuItem>
                 {queues.map((queue) => (
                   <MenuItem key={queue.id} value={queue.id}>
@@ -422,7 +422,7 @@ export function QueueOptionStepper({ queueId, options, updateOptions }) {
                 variant="outlined"
                 className={classes.addButton}
               >
-                Adicionar
+                {i18n.t("queueModal.add")}
               </Button>
             </>
           )}
@@ -515,7 +515,7 @@ export function QueueOptions({ queueId }) {
     <div className={classes.root}>
       <br />
       <Typography>
-        Opções
+        {i18n.t("queueModal.options")}
         <Button
           color="primary"
           size="small"
@@ -524,7 +524,7 @@ export function QueueOptions({ queueId }) {
           style={{ marginLeft: 10 }}
           variant="outlined"
         >
-          Adicionar
+          {i18n.t("queueModal.add")}
         </Button>
       </Typography>
       {renderStepper()}

@@ -168,7 +168,7 @@ const CampaignsConfig = () => {
                   name="longerIntervalAfter"
                   id="longerIntervalAfter"
                   labelId="longerIntervalAfter-label"
-                  label="Intervalo Maior Após"
+                  label={i18n.t("campaignsConfig.longerIntervalAfter")}
                   value={settings.longerIntervalAfter}
                   onChange={(e) => handleOnChangeSettings(e)}
                 >
