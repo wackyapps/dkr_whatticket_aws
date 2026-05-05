@@ -39,7 +39,17 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(Sentry.Handlers.requestHandler());
 app.get("/public/*", (req, res) => {
-  const filePath = path.join(uploadConfig.directory, req.params[0]);
+  const file = req.params[0];
+  const filePath = path.join(uploadConfig.directory, file);
+
+  // Security check: Ensure the resolved path is still within the upload directory
+  const relative = path.relative(uploadConfig.directory, filePath);
+  const isSafe = relative && !relative.startsWith('..') && !path.isAbsolute(relative);
+
+  if (!isSafe) {
+    logger.warn(`Potential path traversal attempt blocked: ${file}`);
+    return res.status(403).end();
+  }
 
   if (filePath.endsWith(".aac")) {
     res.setHeader("Content-Type", "audio/aac");
@@ -52,7 +62,7 @@ app.get("/public/*", (req, res) => {
       } else {
         logger.debug(
           { err },
-          `Error downloading file ${req.params[0]}: ${err.message}`
+          `Error downloading file ${file}: ${err.message}`
         );
         res.status(500).end();
       }

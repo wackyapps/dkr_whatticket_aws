@@ -123,16 +123,6 @@ const waVersionCache = new NodeCache({
 const waVersionMutex = new Mutex();
 const checkWbotDuplicity = new Mutex();
 
-const getProjectWAVersion = async () => {
-  try {
-    const res = await fetch("https://waversion.ticke.tz");
-    const version = await res.json();
-    return version;
-  } catch (error) {
-    logger.warn("Failed to get current WA Version from project repository");
-  }
-  return waVersion;
-};
 
 export const initWASocket = async (
   whatsapp: Whatsapp,
@@ -153,20 +143,7 @@ export const initWASocket = async (
         const { id, name, provider } = whatsappUpdate;
 
         const autoVersion = await waVersionMutex.runExclusive(async () => {
-          let wv = waVersionCache.get("waVersion");
-
-          if (!wv) {
-            wv = await getProjectWAVersion();
-
-            if (!wv) {
-              // anything will be greater
-              return [2, 2300, 0];
-            }
-
-            waVersionCache.set("waVersion", wv);
-          }
-
-          return wv;
+          return waVersion;
         });
 
         const isLegacy = provider === "stable";
