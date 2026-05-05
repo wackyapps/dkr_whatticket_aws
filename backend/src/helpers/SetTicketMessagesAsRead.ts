@@ -1,4 +1,4 @@
-import { WASocket, proto } from "libzapitu-rf";
+import { WASocket, proto } from "@whiskeysockets/baileys";
 import { Op, WhereOptions } from "sequelize";
 import { getIO } from "../libs/socket";
 import Message from "../models/Message";
@@ -53,7 +53,7 @@ const SetTicketMessagesAsRead = async (ticket: Ticket): Promise<void> => {
           if (lastMessage?.key?.remoteJid && !lastMessage.key.fromMe) {
             (wbot as WASocket)
               .chatModify(
-                { markRead: true, lastMessages: [lastMessage] },
+                { markRead: true, lastMessages: [lastMessage as any] },
                 lastMessage.key.remoteJid
               )
               .catch(err => {

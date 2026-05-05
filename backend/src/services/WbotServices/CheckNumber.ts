@@ -24,7 +24,7 @@ const checker = async (number: string, wbot: Session) => {
   return {
     jid: validNumber.jid,
     exists: !!validNumber.exists,
-    lid: (validNumber.lid as string) || null
+    lid: ((validNumber as any).lid as string) || null
   };
 };
 

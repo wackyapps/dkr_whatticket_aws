@@ -88,15 +88,13 @@ export const initIO = (httpServer: Server): SocketIO => {
   setSocketIo(io);
 
   if (process.env.SOCKET_ADMIN && JSON.parse(process.env.SOCKET_ADMIN)) {
-    User.findByPk(1).then(adminUser => {
-      instrument(io, {
-        auth: {
-          type: "basic",
-          username: adminUser.email,
-          password: adminUser.passwordHash
-        },
-        mode: "development"
-      });
+    instrument(io, {
+      auth: {
+        type: "basic",
+        username: process.env.SOCKET_ADMIN_USER || "admin",
+        password: process.env.SOCKET_ADMIN_PASSWORD || "admin"
+      },
+      mode: "development"
     });
   }
 

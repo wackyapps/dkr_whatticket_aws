@@ -15,12 +15,16 @@ const envTokenAuth = (
     const { token: bodyToken } = req.body as TokenPayload;
     const { token: queryToken } = req.query as TokenPayload;
 
-    if (queryToken === process.env.ENV_TOKEN) {
-      return next();
-    }
+    const envToken = process.env.ENV_TOKEN;
 
-    if (bodyToken === process.env.ENV_TOKEN) {
-      return next();
+    if (envToken && envToken.trim() !== "") {
+      if (queryToken === envToken) {
+        return next();
+      }
+
+      if (bodyToken === envToken) {
+        return next();
+      }
     }
   } catch (e) {
     console.log(e);

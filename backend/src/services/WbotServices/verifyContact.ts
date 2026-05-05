@@ -89,7 +89,7 @@ async function getLid(msgContact: IMe, wbot: Session): Promise<string> {
     throw new Error("ERR_WAPP_CONTACT_NOT_FOUND");
   }
 
-  return (ow.lid as string) || null;
+  return ((ow as any).lid as string) || null;
 }
 
 export async function verifyContact(

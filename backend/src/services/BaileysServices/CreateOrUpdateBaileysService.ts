@@ -1,4 +1,4 @@
-import { Contact } from "libzapitu-rf";
+import { Contact } from "@whiskeysockets/baileys";
 import BaileysContact from "../../models/BaileysContact";
 
 interface Request {

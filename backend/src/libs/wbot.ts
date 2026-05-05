@@ -9,7 +9,7 @@ import makeWASocket, {
   proto,
   jidNormalizedUser,
   BinaryNode
-} from "libzapitu-rf";
+} from "@whiskeysockets/baileys";
 
 import { Boom } from "@hapi/boom";
 // import MAIN_LOGGER from "@whiskeysockets/baileys/lib/Utils/logger";
@@ -236,11 +236,11 @@ export const initWASocket = async (
           },
           set: async (key: string, value: any) => {
             logger.debug({ key, value }, `groupCache.set ${key}`);
-            return internalGroupCache.set(key, value);
+            internalGroupCache.set(key, value);
           },
           del: async (key: string) => {
             logger.debug(`groupCache.del ${key}`);
-            return internalGroupCache.del(key);
+            internalGroupCache.del(key);
           },
           flushAll: async () => {
             logger.debug("groupCache.flushAll");
@@ -250,11 +250,8 @@ export const initWASocket = async (
 
         const appName =
           (await GetPublicSettingService({ key: "appName" })) || "Ticketz";
-        const hostName = process.env.BACKEND_URL?.split("/")[2];
-        const appVersion = GitInfo.tagName || GitInfo.commitHash;
-        const clientName = `${appName} ${appVersion}${
-          hostName ? ` - ${hostName}` : ""
-        }`;
+        const appVersion = GitInfo.tagName || GitInfo.commitHash || "1.0.0";
+        const clientName = `${appName}`;
 
         wsocket = makeWASocket({
           logger: loggerBaileys,
@@ -280,7 +277,7 @@ export const initWASocket = async (
           shouldIgnoreJid: jid =>
             isJidBroadcast(jid) || jid?.endsWith("@newsletter"),
           transactionOpts: { maxCommitRetries: 1, delayBetweenTriesMs: 10 }
-        });
+        }) as Session;
 
         wsocket.ev.on("call", async event => {
           logger.trace({ event }, "Received call event");
@@ -309,7 +306,7 @@ export const initWASocket = async (
             );
 
             if (connection === "close") {
-              if ((lastDisconnect?.error as Boom)?.output?.statusCode === 403) {
+              if ((lastDisconnect?.error as any)?.output?.statusCode === 403) {
                 // disconnected from whatsapp
                 await removeWbot(id);
                 await whatsapp.update({
@@ -327,7 +324,7 @@ export const initWASocket = async (
                 );
               }
               if (
-                (lastDisconnect?.error as Boom)?.output?.statusCode !==
+                (lastDisconnect?.error as any)?.output?.statusCode !==
                 DisconnectReason.loggedOut
               ) {
                 // connection dropped without logging out

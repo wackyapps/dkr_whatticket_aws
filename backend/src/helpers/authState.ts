@@ -43,8 +43,8 @@ import type {
   AuthenticationCreds,
   AuthenticationState,
   SignalDataTypeMap
-} from "libzapitu-rf";
-import { BufferJSON, initAuthCreds, proto } from "libzapitu-rf";
+} from "@whiskeysockets/baileys";
+import { BufferJSON, initAuthCreds, proto } from "@whiskeysockets/baileys";
 import Whatsapp from "../models/Whatsapp";
 import BaileysKeys from "../models/BaileysKeys";
 import { logger } from "../utils/logger";

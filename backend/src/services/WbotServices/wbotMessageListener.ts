@@ -1,4 +1,4 @@
-import path from "path";
+import * as path from "path";
 import * as Sentry from "@sentry/node";
 import { isNil, head, keys } from "lodash";
 
@@ -15,7 +15,7 @@ import {
   WAMessageStubType,
   WAGenericMediaMessage,
   WALocationMessage
-} from "libzapitu-rf";
+} from "@whiskeysockets/baileys";
 import { Mutex } from "async-mutex";
 import { Op } from "sequelize";
 import moment from "moment";
@@ -310,8 +310,6 @@ const getContactMessage = async (msg: WAMessage, wbot: Session) => {
       }
     : {
         id: msg.key.remoteJid,
-        lid: msg?.key?.sender_lid,
-        jid: msg?.key?.sender_pn,
         name: msg.key.fromMe ? rawNumber : msg.pushName || msg.verifiedBizName
       };
 };
@@ -2071,7 +2069,7 @@ const wbotMessageListener = async (
         if (await verifyRecentCampaign(message, companyId)) {
           return;
         }
-        await handleMessage(message, wbot, companyId);
+        await handleMessage(message as WAMessage, wbot, companyId);
       });
     });
 

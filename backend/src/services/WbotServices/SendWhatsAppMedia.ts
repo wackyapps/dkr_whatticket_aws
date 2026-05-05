@@ -1,10 +1,10 @@
-import { WAMessage, AnyMediaMessageContent, AnyMessageContent } from "libzapitu-rf";
+import { WAMessage, AnyMediaMessageContent, AnyMessageContent } from "@whiskeysockets/baileys";
 import fs from "fs";
 import { exec } from "child_process";
 import path from "path";
 import ffmpegPath from "@ffmpeg-installer/ffmpeg";
-import mime from "mime-types";
-import iconv from "iconv-lite";
+import * as mime from "mime-types";
+import * as iconv from "iconv-lite";
 import { Readable } from "stream";
 import AppError from "../../errors/AppError";
 import GetTicketWbot from "../../helpers/GetTicketWbot";

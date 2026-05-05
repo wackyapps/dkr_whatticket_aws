@@ -1,7 +1,7 @@
-import { AnyMessageContent, proto } from "libzapitu-rf";
+import { AnyMessageContent, proto } from "@whiskeysockets/baileys";
 import fs from "fs";
-import mime from "mime-types";
-import iconv from "iconv-lite";
+import * as mime from "mime-types";
+import * as iconv from "iconv-lite";
 import Whatsapp from "../models/Whatsapp";
 import GetWhatsappWbot from "./GetWhatsappWbot";
 import { getMessageFileOptions } from "../services/WbotServices/SendWhatsAppMedia";
@@ -34,7 +34,7 @@ export const SendMessage = async (
     const number = messageData.number.toString();
     const chatId = number.includes("@") ? number : `${number}@s.whatsapp.net`;
 
-    let message: proto.WebMessageInfo;
+    let message: any;
 
     const body = `${messageData.body}`;
 
@@ -99,7 +99,7 @@ export const SendMessage = async (
         Number(messageData.saveOnTicket) || null
       );
     } else {
-      wbot.cacheMessage(message);
+      wbot.cacheMessage?.(message);
       await OutOfTicketMessage.create({
         id: message.key.id,
         dataJson: JSON.stringify(message),
