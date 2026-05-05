@@ -10,7 +10,7 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
-RUN npm run build
+RUN npm run generate:i18nkeys && npm run build
 
 # Stage 2: Create the final image
 FROM node:20-alpine
