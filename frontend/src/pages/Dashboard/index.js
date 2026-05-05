@@ -34,8 +34,6 @@ import { SmallPie } from "./SmallPie";
 import { TicketCountersChart } from "./TicketCountersChart";
 import { getTimezoneOffset } from "../../helpers/getTimezoneOffset.js";
 
-import TicketzRegistry from "../../components/TicketzRegistry";
-import { copyToClipboard } from "../../helpers/copyToClipboard.js";
 import api from "../../services/api.js";
 import { SocketContext } from "../../context/Socket/SocketContext.js";
 import { formatTimeInterval } from "../../helpers/formatTimeInterval.js";
