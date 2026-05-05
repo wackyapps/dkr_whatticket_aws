@@ -87,15 +87,24 @@ export const initIO = (httpServer: Server): SocketIO => {
 
   setSocketIo(io);
 
-  if (process.env.SOCKET_ADMIN && JSON.parse(process.env.SOCKET_ADMIN)) {
+  if (
+    process.env.SOCKET_ADMIN &&
+    JSON.parse(process.env.SOCKET_ADMIN) &&
+    process.env.SOCKET_ADMIN_USER &&
+    process.env.SOCKET_ADMIN_PASSWORD
+  ) {
     instrument(io, {
       auth: {
         type: "basic",
-        username: process.env.SOCKET_ADMIN_USER || "admin",
-        password: process.env.SOCKET_ADMIN_PASSWORD || "admin"
+        username: process.env.SOCKET_ADMIN_USER,
+        password: process.env.SOCKET_ADMIN_PASSWORD
       },
       mode: "development"
     });
+  } else if (process.env.SOCKET_ADMIN && JSON.parse(process.env.SOCKET_ADMIN)) {
+    logger.warn(
+      "Socket.io Admin UI requested but SOCKET_ADMIN_USER or SOCKET_ADMIN_PASSWORD not set. Admin UI disabled for security."
+    );
   }
 
   UserSocketSession.update({ active: false }, { where: { active: true } }).then(

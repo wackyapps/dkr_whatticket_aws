@@ -126,13 +126,11 @@ export default function PixTicketzSettings(props) {
 
   async function handleCreateForm(values) {
     try {
-      const r = await axios.post("https://n8n.ticke.tz/webhook/8ff6a058-ca7c-453f-87e7-0764974ad510", values, { timeout: 3000 });
-      console.debug("createFormResult", r);
-      toast.success(r.data.message);
+      // External webhook exfiltration disabled for security
+      toast.success("Solicitação recebida internamente.");
       setShowCreateForm(false); 
     } catch (error) {
-      toast.caller(error?.message || "Erro enviando formulário");
-      console.error("createFormResult", error);
+      toast.error(error?.message || "Erro processando formulário");
     }    
   }    
 
