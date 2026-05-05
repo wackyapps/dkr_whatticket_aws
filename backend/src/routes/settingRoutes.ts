@@ -17,7 +17,6 @@ settingRoutes.get("/settings/:settingKey", isAuth, SettingController.show);
 
 settingRoutes.get(
   "/public-settings/:settingKey",
-  envTokenAuth,
   SettingController.publicShow
 );
 

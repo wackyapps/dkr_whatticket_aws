@@ -31,4 +31,4 @@ ENV PORT=3000
 EXPOSE 3000
 
 # Startup script to wait for DB, migrate and start
-CMD ["sh", "-c", "while ! nc -z $DB_HOST ${DB_PORT:-5432}; do sleep 1; done; npx sequelize db:migrate && npx sequelize db:seed:all && node dist/server.js"]
+CMD ["sh", "-c", "while ! nc -z $DB_HOST ${DB_PORT:-5432}; do sleep 1; done; npx sequelize db:migrate --config dist/config/database.js --migrations-path dist/database/migrations && npx sequelize db:seed:all --config dist/config/database.js --seeders-path dist/database/seeds && node dist/server.js"]

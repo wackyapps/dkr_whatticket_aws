@@ -23,6 +23,8 @@ Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 const app = express();
 
+
+
 app.set("queues", {
   messageQueue,
   sendScheduledMessages
@@ -31,7 +33,7 @@ app.set("queues", {
 app.use(
   cors({
     credentials: true,
-    origin: corsOrigin,
+    origin: (origin, callback) => callback(null, true),
     exposedHeaders: ["Content-Range", "X-Content-Range", "Date"]
   })
 );
