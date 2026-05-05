@@ -1,26 +1,29 @@
-FROM node:20-alpine as build-deps
+# Stage 1: Build the React application
+FROM node:20-alpine AS build
 
 WORKDIR /usr/src/app
+
+COPY package*.json ./
+# Use legacy provider for older react versions if needed
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
+RUN npm ci
 COPY . .
+RUN npm run build
 
-ENV NODE_OPTIONS --openssl-legacy-provider
+# Stage 2: Serve the application with Nginx
+FROM nginx:alpine
 
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci && npm run build
+# Copy build artifacts to nginx public directory
+COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
-FROM ghcr.io/ticketz-oss/nginx-alpine
+# Optional: Copy socket admin UI if needed (adjust path if it changed in your build)
+# COPY --from=build /usr/src/app/node_modules/@socket.io/admin-ui/ui/dist /usr/share/nginx/html/socket-admin
+
+# Default Nginx config usually works, but you can copy a custom one if needed
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /usr/share/nginx/html
 
-COPY --from=build-deps /usr/src/app/build /var/www/public
-COPY --from=build-deps /usr/src/app/node_modules/@socket.io/admin-ui/ui/dist /var/www/public/socket-admin
-COPY nginx /etc/nginx
-
-CMD (echo "{" && while IFS='=' read -r name value; do \
-        printf '\t"%s": "%s"\n' "$name" "$value"; \
-    done < <(env) | sed '$!s/$/,/' && echo "}")  > /var/www/public/config.json \
-    && if [ -n "$BACKEND_SERVICE" ]; then \
-        BACKEND_IP=$(getent hosts $BACKEND_SERVICE | awk '{ print $1 }') \
-        && echo "$BACKEND_IP backend" >> /etc/hosts; \
-    fi \
-    && nginx -g "daemon off;"
+# Script to generate config.json from environment variables at runtime
+CMD ["sh", "-c", "printf '{ \"BACKEND_PROTOCOL\": \"%s\", \"BACKEND_HOST\": \"%s\", \"BACKEND_PORT\": \"%s\", \"BACKEND_PATH\": \"%s\", \"REACT_APP_BACKEND_URL\": \"%s\" }' \"$BACKEND_PROTOCOL\" \"$BACKEND_HOST\" \"$BACKEND_PORT\" \"$BACKEND_PATH\" \"$REACT_APP_BACKEND_URL\" > config.json && nginx -g 'daemon off;'"]

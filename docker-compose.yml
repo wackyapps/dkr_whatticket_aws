@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ticketz-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER:-ticketz}
+      POSTGRES_PASSWORD: ${DB_PASS:-ticketz_password}
+      POSTGRES_DB: ${DB_NAME:-ticketz}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ticketz-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: ticketz-redis
+    restart: always
+    volumes:
+      - redis_data:/data
+    networks:
+      - ticketz-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ticketz-backend
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      NODE_ENV: production
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: ${DB_USER:-ticketz}
+      DB_PASS: ${DB_PASS:-ticketz_password}
+      DB_NAME: ${DB_NAME:-ticketz}
+      REDIS_URI: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      # Add other necessary env vars here
+    volumes:
+      - ./backend/public:/usr/src/app/public
+      - ./backend/private:/usr/src/app/private
+    ports:
+      - "8080:3000"
+    networks:
+      - ticketz-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ticketz-frontend
+    restart: always
+    depends_on:
+      - backend
+    environment:
+      BACKEND_PROTOCOL: http
+      BACKEND_HOST: localhost # This is used by the BROWSER to connect
+      BACKEND_PORT: 8080
+      BACKEND_PATH: /
+    ports:
+      - "3000:80"
+    networks:
+      - ticketz-network
+
+networks:
+  ticketz-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:

@@ -1,38 +1,34 @@
-# syntax=docker/dockerfile:1.7-labs
-
 # Stage 1: Build the application
-FROM node:20 AS build
+FROM node:20-alpine AS build
 
 WORKDIR /usr/src/app
+
+# Install dependencies needed for building
+RUN apk add --no-cache python3 make g++
+
+COPY package*.json ./
+RUN npm ci
+
 COPY . .
+RUN npm run build
 
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci && npm run generate:i18nkeys && npm run build
-
-# Stage 2: Create the final image without source files
-FROM ghcr.io/ticketz-oss/node
-
-ARG TICKETZ_REGISTRY_URL
+# Stage 2: Create the final image
+FROM node:20-alpine
 
 WORKDIR /usr/src/app
 
-# Copy only the necessary build artifacts from the build stage
-COPY --from=build --parents \
-  /usr/src/app/./dist \
-  /usr/src/app/./node_modules \
-  /usr/src/app/./package.json \
-  /usr/src/app/./scripts \
-  .
+# Install runtime dependencies
+RUN apk add --no-cache netcat-openbsd postgresql-client
+
+COPY --from=build /usr/src/app/dist ./dist
+COPY --from=build /usr/src/app/node_modules ./node_modules
+COPY --from=build /usr/src/app/package.json ./package.json
+COPY --from=build /usr/src/app/scripts ./scripts
 
 ENV NODE_ENV=production
 ENV PORT=3000
-ENV TICKETZ_REGISTRY_URL=${TICKETZ_REGISTRY_URL}
 
 EXPOSE 3000
 
-CMD dockerize -wait tcp://${DB_HOST}:5432 -timeout 60s \
-  && npx sequelize db:migrate  --config dist/config/database.js --migrations-path dist/database/migrations \
-  && ./scripts/load-retrieved.sh /retrieve; exit_code=$? \
-  && if [ $exit_code -eq 1 ]; then npm run mark-seeds; exit 0; elif [ $exit_code -ge 100 ]; then exit 1; fi \
-  && npx sequelize db:seed:all --config dist/config/database.js --seeders-path dist/database/seeds \
-  && node dist/server.js
+# Startup script to wait for DB, migrate and start
+CMD ["sh", "-c", "while ! nc -z $DB_HOST ${DB_PORT:-5432}; do sleep 1; done; npx sequelize db:migrate && npx sequelize db:seed:all && node dist/server.js"]
