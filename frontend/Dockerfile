@@ -4,8 +4,11 @@ FROM node:20-alpine AS build
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-# Use legacy provider for older react versions if needed
-ENV NODE_OPTIONS=--openssl-legacy-provider
+# Use legacy provider for older react versions if n
+
+ENV NODE_OPTIONS="--openssl-legacy-provider --max-old-space-size=1024"
+
+
 
 RUN npm ci
 COPY . .

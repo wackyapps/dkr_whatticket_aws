@@ -33,7 +33,7 @@ app.set("queues", {
 app.use(
   cors({
     credentials: true,
-    origin: (origin, callback) => callback(null, true),
+    origin:true,
     exposedHeaders: ["Content-Range", "X-Content-Range", "Date"]
   })
 );
