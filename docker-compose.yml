@@ -33,16 +33,21 @@ services:
       - postgres
       - redis
     environment:
-      NODE_ENV: production
-      DB_HOST: postgres
-      DB_PORT: 5432
+      NODE_ENV: ${NODE_ENV:-production}
+      DB_HOST: ${DB_HOST:-postgres}
+      DB_PORT: ${DB_PORT:-5432}
       DB_USER: ${DB_USER:-ticketz}
       DB_PASS: ${DB_PASS:-ticketz_password}
       DB_NAME: ${DB_NAME:-ticketz}
-      REDIS_URI: redis://redis:6379
-      FRONTEND_URL: "*"
+      REDIS_URI: ${REDIS_URI:-redis://redis:6379}
+      FRONTEND_URL: ${FRONTEND_URL:-*}
+      BACKEND_URL: ${BACKEND_URL}
       JWT_SECRET: ${JWT_SECRET:-your_secret_here}
       JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      ENV_TOKEN: ${ENV_TOKEN}
+      SOCKET_ADMIN: ${SOCKET_ADMIN}
+      SOCKET_ADMIN_USER: ${SOCKET_ADMIN_USER}
+      SOCKET_ADMIN_PASSWORD: ${SOCKET_ADMIN_PASSWORD}
       # Add other necessary env vars here
     volumes:
       - ./backend/public:/usr/src/app/public
@@ -61,10 +66,11 @@ services:
     depends_on:
       - backend
     environment:
-      BACKEND_PROTOCOL: http
+      BACKEND_PROTOCOL: ${BACKEND_PROTOCOL:-http}
       BACKEND_HOST: ${BACKEND_HOST:-localhost}
       BACKEND_PORT: ${BACKEND_PORT:-8080}
-      BACKEND_PATH: ""
+      BACKEND_PATH: ${BACKEND_PATH:-}
+      REACT_APP_BACKEND_URL: ${BACKEND_URL}
     ports:
       - "3000:80"
     networks:
