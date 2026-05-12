@@ -29,11 +29,12 @@ export function getBackendURL() {
 }
 
 export function getBackendSocketURL() {
-  return (
-    config.REACT_APP_BACKEND_URL ||
+  const url = config.REACT_APP_BACKEND_URL ||
     (config.BACKEND_PROTOCOL ?? "https") + "://" +
-    (config.BACKEND_HOST) + ":" + (config.BACKEND_PORT ?? 443)
-  );
+    (config.BACKEND_HOST) + ":" + (config.BACKEND_PORT ?? 443);
+  
+  // Remove /api suffix if it exists to avoid Socket.io "Invalid namespace" error
+  return url.replace(/\/api$/, "");
 }
 
 export default config;
