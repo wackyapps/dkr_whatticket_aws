@@ -22,6 +22,7 @@ class SystemError extends Error {
 Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 const app = express();
+app.set("trust proxy", true);
 
 
 
